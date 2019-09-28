@@ -1,10 +1,14 @@
 import React from "react";
-import Alert from "@kiwicom/orbit-components/lib/Alert";
+import Layout, { LayoutColumn } from "@kiwicom/orbit-components/lib/Layout";
+import Header from "./Components/Header/Header";
+
 
 
 const Home = () => (
   <div>
-    <Alert >asdasd</Alert>
+
+        <Header />
+
   </div>
 );
 
