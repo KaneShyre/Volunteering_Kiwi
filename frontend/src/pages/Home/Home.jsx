@@ -4,7 +4,7 @@ import Alert from "@kiwicom/orbit-components/lib/Alert";
 
 const Home = () => (
   <div>
-    <Alert >asdasd</Alert>
+    <Alert>asdasd</Alert>
   </div>
 );
 
