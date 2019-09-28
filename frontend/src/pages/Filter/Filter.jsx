@@ -5,6 +5,9 @@ import Select from "@kiwicom/orbit-components/lib/Select";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import Loading from "@kiwicom/orbit-components/lib/Loading";
+import './filter.scss';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
 
 const FilterSchema = Yup.object().shape({
   interest: Yup.string()
@@ -31,6 +34,7 @@ function Filter() {
   }
 
   return (
+    
     <Formik
       initialValues={{
         interest: "",
@@ -48,45 +52,50 @@ function Filter() {
       {({
         errors, touched, values, handleChange, handleSubmit,
       }) => (
-        <Layout type="MMB">
-          <LayoutColumn>
-            <Form onSubmit={handleSubmit}>
-              <Select
-                id="select-interest-id"
-                required
-                placeholder="Select your interests..."
-                size="normal"
-                options={Option}
-                disabled={false}
-                name="interest"
-                label="Interests"
-                onChange={handleChange}
-                dataTest="test"
-                value={values.interest}
-                customValueText={null}
-                spaceAfter="large"
-                error={(touched.interest && errors.interest) && <div>{errors.interest}</div>}
-              />
-              <Select
-                id="select-location-id"
-                required
-                placeholder="Location..."
-                size="normal"
-                options={LocationOption}
-                disabled={false}
-                name="location"
-                label="Location"
-                onChange={handleChange}
-                dataTest="test"
-                value={values.location}
-                customValueText={null}
-                spaceAfter="large"
-                error={(touched.location && errors.location) && <div>{errors.location}</div>}
-              />
-              <Button submit>Filter</Button>
-            </Form>
+        <><Header />
+        <Layout type="MMB" >
+          <LayoutColumn >
+            <div className="form">        
+              <Form onSubmit={handleSubmit} >
+                <Select
+                  id="select-interest-id"
+                  required
+                  placeholder="Select your interests..."
+                  size="normal"
+                  options={Option}
+                  disabled={false}
+                  name="interest"
+                  label="Interests"
+                  onChange={handleChange}
+                  dataTest="test"
+                  value={values.interest}
+                  customValueText={null}
+                  spaceAfter="large"
+                  error={(touched.interest && errors.interest) && <div>{errors.interest}</div>}
+                />
+                <Select
+                  id="select-location-id"
+                  required
+                  placeholder="Location..."
+                  size="normal"
+                  options={LocationOption}
+                  disabled={false}
+                  name="location"
+                  label="Location"
+                  onChange={handleChange}
+                  dataTest="test"
+                  value={values.location}
+                  customValueText={null}
+                  spaceAfter="large"
+                  error={(touched.location && errors.location) && <div>{errors.location}</div>}
+                />
+                <Button submit>Filter</Button>
+              </Form>
+            </div>
           </LayoutColumn>
         </Layout>
+        <Footer />
+        </>
 
       )}
     </Formik>
