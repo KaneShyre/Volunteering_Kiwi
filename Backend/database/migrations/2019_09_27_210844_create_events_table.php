@@ -17,7 +17,8 @@ class CreateEventsTable extends Migration
             $table->bigIncrements('id');
             $table->string('event_name');
             $table->integer('number_volunteers');
-            $table->string('location');
+            $table->string('country');
+            $table->string('city');
             $table->dateTime('event_time');
             $table->string('description');
             $table->string('interests');
