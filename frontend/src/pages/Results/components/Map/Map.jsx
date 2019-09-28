@@ -44,7 +44,7 @@ class Map extends Component {
 
        new mapboxgl.Popup({closeOnClick: false})
           .setLngLat([response.lon, response.lat])
-          .setHTML('<p>asdasd</p>')
+          .setHTML('<p>Tech Conference</p>')
           .addTo(state.map);
 
       this.setState({map:state.map

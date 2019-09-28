@@ -8,14 +8,14 @@ const CurrentEvent = ({ showEvent , currentEvent}) => {
   }
   return (
     <div className="current-event">
-      <h1>asdasdasd</h1>
+      <h1>Name of the Event: World Tech Conference </h1>
       <Button
         onClick={() => {}}
         ariaControls="element ID"
         ariaExpanded={false}
         title="Additional information for accessibility"
       >
-          Apply to Volunteering
+          Apply for Volunteering
       </Button>
     </div>
 
