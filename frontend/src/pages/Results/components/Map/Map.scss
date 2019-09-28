@@ -1,0 +1,10 @@
+.map-container{
+  display: flex;
+}
+.close{
+  animation: close 0.5s ease-out forwards;
+  @keyframes close {
+    from{width: 80vw}
+    to{width: 0vw;}
+  }
+}
