@@ -10,8 +10,8 @@ const mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
 class Map extends Component {
   state = {
     map:null,
-    items:[1,1,1,1,1,1,1,1,1,1]
-  }
+    items:[{city:"Barcelona",country:"spain"},{city:"Paris",country:"france"},{city:"lahore",country:"pakistan"},]
+  };
 
   componentDidMount() {
     mapboxgl.accessToken = "pk.eyJ1IjoiaGFzc25pYW4iLCJhIjoiY2sxMzJmMXlnMDUzZDNocnNpZWJienZ3cCJ9.lt0SfKolHmWTzJwctnQwyA";
@@ -20,19 +20,43 @@ class Map extends Component {
       style: "mapbox://styles/hassnian/ck1383xjh0spu1cqv6rgeqp84",
     });
     this.setState({map})
+    this.renderAllPopUps()
   }
 
-  zoom = async ()=>{
-    const {data} = await ApiService.geo.getCoord("bogota")
+  renderAllPopUps= ()=>{
+    this.state.items.map(async ({country,city})=>{
+      const response = await this.getDataOf({country,city});
+      if(!response) return null
+      const state = {...this.state}
+
+       new mapboxgl.Popup({closeOnClick: false})
+          .setLngLat([response.lon, response.lat])
+          .setHTML('<h1>Hello World!</h1>')
+          .addTo(state.map);
+
+      this.setState({map:state.map
+      })
+    })
+
+  };
+  getDataOf = async ({city,country})=>{
+    const {data} = await ApiService.geo.getCoord(city,country)
+    if(!data[0]) return null
     const lat = data[0].lat;
     const lon = data[0].lon;
-    this.state.map.flyTo({
+    return {lat,lon}
+  }
+  zoom = async ({country,city})=>{
+    const response = await this.getDataOf({country,city});
+    if(!response) return null
+    const state = {...this.state}
+    state.map.flyTo({
       zoom: 9,
       center: [
-        lon,
-        lat]
+        response.lon,
+        response.lat]
     });
-    console.log(lat,lon)
+    this.setState({map:state.map});
   };
 
 
@@ -42,12 +66,11 @@ class Map extends Component {
 
 
         <Layout type="Booking"  >
-
-          <LayoutColumn style={{width:"100%"}}>
+          <LayoutColumn >
             <div id="map" style={{ width: "100%", height: "100%" }} />
           </LayoutColumn>
           <LayoutColumn style={{width:"100%"}}>
-            {this.state.items.map((item) => <ResultItem key={uuid()} click={this.zoom} />)}
+            {this.state.items.map((item) => <ResultItem key={uuid()} {...item} click={this.zoom} />)}
           </LayoutColumn>
         </Layout>
       </div>
