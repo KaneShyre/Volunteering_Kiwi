@@ -3,7 +3,7 @@ Project submission for the `Global Travel Hackathon in Barcelona, by F5 team`.
 
 **Write one sentence explaining what does your project.**
 
-![Add a screenshot from your project. For example the main website page.](https://raw.githubusercontent.com/Global-Travel-Hackathon/GTH-Location-TeamName/master/screenshots/Global-Travel-Hackathon-image.png)
+![Add a screenshot from your project. For example the main website page.](screenshots/Screenshot 2019-09-28 at 15.32.51.png
 
 ## :books: Description
 
