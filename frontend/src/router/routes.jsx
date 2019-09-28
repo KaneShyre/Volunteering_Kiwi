@@ -2,6 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import uuid from "uuid/v4";
 import Home from "../pages/Home/Home";
+import Filter from "../pages/Filter/Filter";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 const routes = [
@@ -10,6 +11,11 @@ const routes = [
     exact: true,
     auth: true,
     component: () => <Home />,
+  }, {
+    path: "/filter",
+    exact: true,
+    auth: false,
+    component: () => <Filter />,
   }, {
     path: "*",
     exact: true,
