@@ -8,7 +8,7 @@ const routes = [
   {
     path: "/home",
     exact: true,
-    auth: true,
+    auth: false,
     component: () => <Home />,
   }, {
     path: "*",
