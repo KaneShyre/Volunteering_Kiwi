@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@kiwicom/orbit-components": "^0.61.2",
+    "country-list": "^2.2.0",
     "formik": "^1.5.8",
     "mapbox-gl": "^1.4.0",
     "node-sass": "^4.12.0",

@@ -1,0 +1,19 @@
+.current-event{
+  position: absolute;
+  z-index: 9999;
+  background-color: rgba(255,255,255,0.8);
+  width:70vw;
+  height: 300px;
+  margin-left: 5vw;
+  margin-bottom: 0px;
+  bottom: 0;
+  padding: 10px;
+  opacity: 0;
+  animation: up 0.5s forwards ease-out;
+}
+@keyframes up {
+  from{margin-bottom: 0px;opacity: 0}
+  to{margin-bottom: 50px; opacity: 1}
+
+}
+

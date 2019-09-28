@@ -3,14 +3,19 @@ import ResultItem from "../ResultItem/ResultsItem";
 import ApiService from "../../../../services/api.services"
 import uuid from "uuid/v4"
 import Layout, { LayoutColumn } from "@kiwicom/orbit-components/lib/Layout";
-
-
+import "./Map.scss"
+import {Link } from "react-router-dom"
+import CurrentEvent from "../CurrentEvent/CurrentEvent";
 const mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
+const { getCode, getName } = require('country-list');
+
 
 class Map extends Component {
   state = {
     map:null,
-    items:[{city:"Barcelona",country:"spain"},{city:"Paris",country:"france"},{city:"lahore",country:"pakistan"},]
+    items:[{id:uuid(),city:"Barcelona",country:"spain"},{id:uuid(),city:"Paris",country:"france"},{id:uuid(),city:"lahore",country:"pakistan"},],
+    showEvent:false,
+    currentEvent:{},
   };
 
   componentDidMount() {
@@ -18,20 +23,28 @@ class Map extends Component {
     const map = new mapboxgl.Map({
       container: "map",
       style: "mapbox://styles/hassnian/ck1383xjh0spu1cqv6rgeqp84",
+      trackResize:true,
     });
-    this.setState({map})
+    this.setState({map});
     this.renderAllPopUps()
+  }
+
+  resizeMap = ()=>{
+    const state = {...this.state}
+    state.map.resize();
+    this.setState({map:state.map})
   }
 
   renderAllPopUps= ()=>{
     this.state.items.map(async ({country,city})=>{
+      console.log(getCode(country));
       const response = await this.getDataOf({country,city});
       if(!response) return null
       const state = {...this.state}
 
        new mapboxgl.Popup({closeOnClick: false})
           .setLngLat([response.lon, response.lat])
-          .setHTML('<h1>Hello World!</h1>')
+          .setHTML('<p>asdasd</p>')
           .addTo(state.map);
 
       this.setState({map:state.map
@@ -46,6 +59,16 @@ class Map extends Component {
     const lon = data[0].lon;
     return {lat,lon}
   }
+
+  showEvent = (id) =>{
+    const state = {...this.state};
+    state.items.forEach(item=>{
+      if(item.id === id){
+        this.setState({currentEvent:item})
+      }
+    })
+    this.setState({showEvent:true})
+  }
   zoom = async ({country,city})=>{
     const response = await this.getDataOf({country,city});
     if(!response) return null
@@ -54,25 +77,29 @@ class Map extends Component {
       zoom: 9,
       center: [
         response.lon,
-        response.lat]
+        response.lat],
+      offset: [0,-200]
     });
     this.setState({map:state.map});
   };
 
+  clickList = async ({country,city,id})=>{
+    await this.zoom({country,city})
+    setTimeout(()=>{
+      this.showEvent(id);
+    },4000)
+
+  }
+
 
   render() {
     return (
-      <div style={{maxWidth:"100% !important"}}>
-
-
-        <Layout type="Booking"  >
-          <LayoutColumn >
-            <div id="map" style={{ width: "100%", height: "100%" }} />
-          </LayoutColumn>
-          <LayoutColumn style={{width:"100%"}}>
-            {this.state.items.map((item) => <ResultItem key={uuid()} {...item} click={this.zoom} />)}
-          </LayoutColumn>
-        </Layout>
+      <div className="map-container">
+        <CurrentEvent showEvent={this.state.showEvent} currentEvent={this.state.currentEvent}/>
+            <div id="map" style={{ width: "80vw", height: "100vh" }} />
+        <div>
+            {this.state.items.map((item) => <ResultItem  key={uuid()} {...item} click={this.clickList} />)}
+        </div>
       </div>
     );
   }
