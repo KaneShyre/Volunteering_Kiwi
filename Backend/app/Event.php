@@ -9,7 +9,8 @@ class Event extends Model
     protected $fillable = [
         'event_name',
         'number_volunteers',
-        'location',
+        'country',
+        'city',
         'event_time',
         'description',
         'interests'       
