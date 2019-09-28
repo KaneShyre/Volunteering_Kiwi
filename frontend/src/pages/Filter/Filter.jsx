@@ -24,7 +24,7 @@ function Filter() {
     return (
       <Layout type="MMB">
         <LayoutColumn>
-          <Loading type="pageLoader" text="Finding volounteer" />
+          <Loading type="pageLoader" text="Finding events for you!" />
         </LayoutColumn>
       </Layout>
     );
