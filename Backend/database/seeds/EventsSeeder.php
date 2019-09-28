@@ -12,33 +12,50 @@ class EventsSeeder extends Seeder
      */
 
     private $events= array(
-            array(  'event_name' => 'festival1',
+            array(  'event_name' => 'Firenze Rocks',
                     'number_volunteers' => '50',
-                    'location' => 'aqui',
-                    'event_time' => '2019-09-30',
-                    'description' => 'genial',
-                    'interests' => 'hack'),
-            array(  'event_name' => 'festival2',
+                    'country' => 'Italy',
+                    'city' => 'Firenze',
+                    'event_time' => '2020-06-11',
+                    'description' => 'Rock Festival',
+                    'interests' => 'Hard Rock/Metal, Rock'),
+            array(  'event_name' => 'Marsatac',
                     'number_volunteers' => '70',
-                    'location' => 'aca',
-                    'event_time' => '2020-06-24',
-                    'description' => 'malo',
-                    'interests' => 'develop'),
-            array(  'event_name' => 'festival3',
+                    'country' => 'France',
+                    'city' => 'Marseille',
+                    'event_time' => '2018-06-15',
+                    'description' => 'Hip-Hop Festival',
+                    'interests' => 'Electronic, Hip-Hop/Rap'),
+            array(  'event_name' => 'Download Festival Madrid',
                     'number_volunteers' => '90',
-                    'location' => 'alla',
-                    'event_time' => '2021-07-03',
-                    'description' => 'fome',
-                    'interests' => 'rock'),
-            array(  'event_name' => 'festival4',
+                    'country' => 'Spain',
+                    'city' => 'Madrid',
+                    'event_time' => '2019-06-30',
+                    'description' => 'Hard Rock Festival',
+                    'interests' => 'Hard Rock/Metal'),
+            array(  'event_name' => 'Mad Cool',
                     'number_volunteers' => '100',
-                    'location' => 'alli',
-                    'event_time' => '2022-05-03',
-                    'description' => 'bueno',
-                    'interests' => 'juegos'),
+                    'country' => 'Spain',
+                    'city' => 'Madrid',
+                    'event_time' => '2019-07-11',
+                    'description' => 'Pop Festival',
+                    'interests' => 'Electronic, Pop, Rock'),
+            array(  'event_name' => 'BBF Barcelona Beach Festival',
+                    'number_volunteers' => '30',
+                    'country' => 'Spain',
+                    'city' => 'Barcelona',
+                    'event_time' => '2019-07-13',
+                    'description' => 'Electronic Music Festival',
+                    'interests' => 'Electronic'),
+            array(  'event_name' => 'Dcode',
+                    'number_volunteers' => '40',
+                    'country' => 'Spain',
+                    'city' => 'Madrid',
+                    'event_time' => '2019-09-07',
+                    'description' => 'Rock Festival',
+                    'interests' => 'Electronic, Rock'),
     );
 
-    //contador de filas creadas
     private $rows = 0;
     public function eventSeed() {
          //
@@ -49,7 +66,8 @@ class EventsSeeder extends Seeder
                 $event_seed = new Event();            
                 $event_seed->event_name = $this->events[$i]['event_name'];
                 $event_seed->number_volunteers = $this->events[$i]['number_volunteers'];
-                $event_seed->location = $this->events[$i]['location'];
+                $event_seed->country = $this->events[$i]['country'];
+                $event_seed->city = $this->events[$i]['city'];
                 $event_seed->event_time = $this->events[$i]['event_time'];
                 //dd($this->events[$i]['description']);
                 $event_seed->description = $this->events[$i]['description'];
